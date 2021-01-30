@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import FooA from './FooA'
+import Foo from './Foo'
+import Bar from './Bar'
+import { useState } from 'react'
+function App () {
+  const [comp, setComp] = useState('Foo')
+  const activate = c => {
+    setComp(c)
+  }
+  const renderComp = () => {
+    switch (comp) {
+      case 'Foo':
+        return <Foo />
+      case 'Bar':
+        return <Bar />
+      case 'FooA':
+        return <FooA />
+      default:
+        return null
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div>
+        <button type='button' onClick={() => activate('Foo')}>
+          Foo
+        </button>{' '}
+        <button href='about://' onClick={() => activate('Bar')}>
+          Bar
+        </button>{' '}
+        |
+        <button type='button' onClick={() => activate('FooA')}>
+          FooA (improved version of Foo)
+        </button>{' '}
+      </div>
+      {renderComp()}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
